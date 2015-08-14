@@ -12,28 +12,36 @@
     <form>
       <fieldset>
         <legend>Employee Entry Form</legend>
-        <p>
+
+        <div>
           <input type = "text" id="fName" name = "firstName" required />
-        </p>
-        <p>
-          <input type = "text" name = "lastName">
-        </p>
-        <p>
+        </div>
+
+        <div>
+          <input type = "text" id="lName" name = "lastName">
+        </div>
+        
+        <div>
           <input type = "number" name = "employeeNum">
-        </p>
-        <p>
-          <input type = "text" name = "title">
-        </p>
-        <p>
-          <input type = "number" name = "lastRevScore">
-        </p>
-        <p>
-          <input type = "number" name = "Salary">
-        </p>
-          <input type = "submit" value = "submit">
+        </div>
+        
+        <div>
+          <input type = "text" id = "title" name = "title">
+        </div>
+        
+        <div>
+          <input type = "number" id = "lRevScore" name = "lastRevScore">
+        </div>
+        
+        <div>
+          <input type = "number" id = "salary" name = "Salary">
+        </div>
+        
+          <input type = "submit" id = "add" value = "submit">
+      </fieldset>
+    </form> 
 
-      </fieldset> 
-
+    <script src="jquery-2.1.4.min.js"></script>
     <script src="weekend1.js"></script>
   </body>
 
