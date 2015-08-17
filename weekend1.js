@@ -1,78 +1,55 @@
 $(document).ready(function(){
 
 //creating array to store objects
-var newEmployee = [];
+var $form = $('#employeeForm');
+var $fName = $('#fName');
+var $lName = $('#lName');
+var $empNum = $('#employeeNum');
+var $title = $('#title');
+var $score = $('#lRevScore');
+var $salary = $('#salary');
+var $clear = $('form').trigger('reset');
+var $add = $('#new')
+
+
 
 
 //using form to create object
-$('#employeeForm').submit(function(e){ 
-	var $inputs = $('#employeeForm :input');
-	
+$form.on('submit', function(e){ 
 	e.preventDefault();
+	var employees = new employee($fName.val(), $lName.val(), $empNum.val(), $title.val(), $score.val(), $salary.val());
 	
-	var employee = {};
-	
-	newEmployee.push(employee);
-	
+	addEmployee(employees);
 
-	//creating new employee
-	$inputs.each(function(){
-		 employee[this.name] = $(this).val();
-    });
-    
+});
 
-    //assigning variable for background color
-    var color = revColor(employee);
-	console.log(color);
+var employee = function(firstName, lastName, employeeNum, title, score, salary){
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.employeeNum = employeeNum;
+	this.title = title;
+	this.score = score;
+	this.salary = salary;
+}
 
-	
-	//appending to DOM
-	var show = $('#new').append(color)
-	show.append('<li> Name: '+employee.firstName+' '+employee.lastName+'</li>');
-	show.append('<li>Employee Number: '+employee.employeeNum+'</li>');
-	show.append('<li>Title: '+employee.title+'</li>');
-	show.append('<li>Review Score: '+employee.lastRevScore+'</li>');
-	show.append('<li>Salary: '+employee.Salary+'</li>');
-	show.append('<button id = "remove">remove</button>');
+function addEmployee(employee){
+	var $li = $('<li>');
+	$li.attr('class', 'score'+employee.score);
+	$li.text(employee.firstName+' '+employee.lastName+', '+employee.employeeNum+', '+employee.title+', '+employee.score+', '+employee.salary);
 
-	$(".bad li").css("background-color", "red");
-	
-	
-	//clearing form
-	$('form').trigger('reset');
-	});
 
-	
-	//creating remove button functionality
-	function remove(){
-	$('#remove').click(function(){
+	var $button = $('<button>');
+	$button.text('remove');
+	$button.attr('class', 'remove');
+
+	$li.append($button);
+
+	$add.append($li);
+}
+
+
+$add.on('click', '.remove', function(e){
+		e.preventDefault();
 		$(this).parent().remove();
-		});
-	}
-	
-
-	//creating function for ul designation
-	function revColor(employee) {
-		switch(parseInt(employee.lastRevScore)){
-			case 1:
-			return '<ul class = "worst">'
-			break;
-			case 2:
-			return '<ul class = "bad">'
-			break;
-			case 3: 
-			return '<ul class = "average">'
-			break;
-			case 4:
-			return '<ul class = "better">'
-			break;
-			case 5:
-			return '<ul class = "best">'
-			default:
-			return '<ul>'
-			break;
-		}
-	}
-	
-	
+		})
 });
